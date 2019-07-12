@@ -25,5 +25,5 @@ yarn-error.log*
 coverage
 
 # Build Products
-dist
-*.tgz
+# dist
+# *.tgz
