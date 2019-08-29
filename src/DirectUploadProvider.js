@@ -11,7 +11,7 @@
 import * as React from 'react'
 
 import Upload from './Upload'
-
+import UploadWorker from 'web-worker:./worker';
 import type {
   ActiveStorageFileUpload,
   Origin,
@@ -86,14 +86,19 @@ class DirectUploadProvider extends React.Component<Props, State> {
     if (this.state.uploading) return
 
     this.setState({ uploading: true })
-
-    const signedIds = await Promise.all(
+    const uploadWorker = new UploadWorker();
+    uploadWorker.onmessage = function (e) {
+      console.log(e.data)
+    }
+    uploadWorker.postMessage(4)
+    
+   /* const signedIds = await Promise.all(
       this.uploads.map(upload => upload.start())
     )
 
     this.props.onSuccess(signedIds)
     this.uploads = []
-    this.setState({ fileUploads: {}, uploading: false })
+    this.setState({ fileUploads: {}, uploading: false }) */
   }
 
   handleChangeFileUpload = (fileUpload: {

@@ -1,6 +1,7 @@
 import commonjs from 'rollup-plugin-commonjs'
 import resolve from 'rollup-plugin-node-resolve'
 import babel from 'rollup-plugin-babel'
+import webWorkerLoader from 'rollup-plugin-web-worker-loader';
 
 import pkg from './package.json'
 
@@ -10,23 +11,24 @@ export default {
   output: [
     {
       file: pkg.main,
-      format: 'cjs',
+      name:pkg.module,
+      format: 'esm',
       exports: 'named',
     },
     {
       file: pkg.module,
-      format: 'es',
+      format: 'esm',
+      name:pkg.module,
       exports: 'named',
-    },
+    }
   ],
 
   external: ['react', 'react-dom'],
 
   plugins: [
     babel({ exclude: 'node_modules/**', runtimeHelpers: true }),
-
     resolve({ jsnext: true, main: true }),
-
+    webWorkerLoader(),
     commonjs({
       include: 'node_modules/**',
       namedExports: {
