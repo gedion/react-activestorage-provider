@@ -17,6 +17,7 @@ import csrfHeader from './csrfHeader'
 
 import type { DelegatedProps } from './DirectUploadProvider'
 import type { Endpoint, CustomHeaders } from './types'
+import Upload from './Upload'
 
 type Props = {|
   ...DelegatedProps,
@@ -94,6 +95,6 @@ class ActiveStorageProvider extends React.Component<Props> {
 }
 
 export default ActiveStorageProvider
-export { DirectUploadProvider }
+export { DirectUploadProvider, Upload }
 
 export type { ActiveStorageFileUpload, Endpoint, RenderProps } from './types'
